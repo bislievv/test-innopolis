@@ -12,24 +12,24 @@ function ToggleFavorite({ size, id }: Props) {
   const dispatch = useDispatch();
 
   const favorites = useCustomSelector((state => state.favorites));
-  const fave = favorites.find((beerId) => Number(beerId) === id);
+  const oneBeer = favorites.find((beerId) => Number(beerId) === id);
 
   useEffect(() => {
     localStorage.setItem("favoriteBeers", JSON.stringify(favorites));
   }, [favorites])
 
   const toggleFavorite = () => {
-    const type = !fave ? "beers/addFavoriteBeer" : "beers/deleteFavoriteBeer";
+    const type = !oneBeer ? "beers/addFavoriteBeer" : "beers/deleteFavoriteBeer";
 
     dispatch({ type, payload: id })
   }
 
   return (
-      <FavoriteIcon
-          size={size}
-          onClick={toggleFavorite}
-          isFavorite={!!fave}
-      />
+    <FavoriteIcon
+      size={size}
+      onClick={toggleFavorite}
+      isFavorite={!!oneBeer}
+    />
   );
 }
 

@@ -11,27 +11,35 @@ export interface beersState {
   favorites: string[];
 }
 
+export enum userActionTypes {
+  FETCH_BEERS_FULFILLED = "beers/fetch/fulfilled",
+  FETCH_BEERS_REJECTED = "beers/fetch/rejected",
+  FETCH_BEERS_PENDING = "beers/fetch/pending",
+  ADD_FAVORITE_BEER = "beers/addFavoriteBeer",
+  DELETE_FAVORITE_BEER = "beers/deleteFavoriteBeer",
+}
+
 interface getBeers {
-  type: "beers/fetch/fulfilled";
+  type: userActionTypes.FETCH_BEERS_FULFILLED;
   payload: Beer[];
 }
 
 interface getBeersRej {
-  type: "beers/fetch/rejected";
+  type: userActionTypes.FETCH_BEERS_REJECTED;
   error: string;
 }
 
 interface getBeersPen {
-  type: "beers/fetch/pending";
+  type: userActionTypes.FETCH_BEERS_PENDING;
 }
 
 interface addFavorite {
-  type: "beers/addFavoriteBeer";
+  type: userActionTypes.ADD_FAVORITE_BEER;
   payload: string;
 }
 
 interface deleteFavorite {
-  type: "beers/deleteFavoriteBeer";
+  type: userActionTypes.DELETE_FAVORITE_BEER;
   payload: string;
 }
 

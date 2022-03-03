@@ -22,16 +22,15 @@ function SingleBeerPage() {
   return currentBeer ? (
     <>
       <div className="col-12 text-left flex">
-        <div className="col-6">
+        <div className="col-6 border-solid border-300 border-round">
           <BeerInfo beer={currentBeer} />
         </div>
-        <div className="col-6">
+        <div className="col-6 flex justify-content-between">
           <ToggleFavorite id={Number(id)} size="50px" />
           <img
-              src={currentBeer.image_url}
-              alt="beer"
-              className="ml-auto block"
-              width={150}
+            src={currentBeer.image_url}
+            alt="beer"
+            width={150}
           />
         </div>
       </div>

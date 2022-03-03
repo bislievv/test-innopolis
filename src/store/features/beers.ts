@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "react";
-import { beerAction, beersState } from "../types/beers";
+import { beerAction, beersState, userActionTypes } from "../types/beers";
 
 const favoriteBeersLS = localStorage.getItem("favoriteBeers");
 
@@ -16,33 +16,35 @@ export default function beers(
   action: beerAction
 ): beersState {
   switch (action.type) {
-    case "beers/fetch/pending":
+    case userActionTypes.FETCH_BEERS_PENDING:
       return {
         ...state,
         loading: true,
       };
-    case "beers/fetch/fulfilled":
+    case userActionTypes.FETCH_BEERS_FULFILLED:
       return {
         ...state,
         beers: action.payload,
         loading: false,
       };
-    case "beers/fetch/rejected":
+    case userActionTypes.FETCH_BEERS_REJECTED:
       return {
         ...state,
         loading: false,
         error: action.error,
       };
-    case "beers/addFavoriteBeer": {
+    case userActionTypes.ADD_FAVORITE_BEER: {
       return {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
     }
-    case "beers/deleteFavoriteBeer":
+    case userActionTypes.DELETE_FAVORITE_BEER:
       return {
         ...state,
-        favorites: state.favorites.filter(favoriteId => action.payload !== favoriteId),
+        favorites: state.favorites.filter(
+          favoriteId => action.payload !== favoriteId
+        ),
       };
     default:
       return state;
@@ -52,12 +54,15 @@ export default function beers(
 export const getBeers = () => {
   return async (dispatch: Dispatch<beerAction>) => {
     try {
-      dispatch({ type: "beers/fetch/pending" });
+      dispatch({ type: userActionTypes.FETCH_BEERS_PENDING });
       const { data } = await axios.get("https://api.punkapi.com/v2/beers");
 
-      dispatch({ type: "beers/fetch/fulfilled", payload: data });
+      dispatch({ type: userActionTypes.FETCH_BEERS_FULFILLED, payload: data });
     } catch (e: any) {
-      dispatch({ type: "beers/fetch/rejected", error: e.toString() });
+      dispatch({
+        type: userActionTypes.FETCH_BEERS_REJECTED,
+        error: e.toString(),
+      });
     }
   };
 };
