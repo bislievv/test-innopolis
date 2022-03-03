@@ -25,8 +25,10 @@ function SingleBeerPage() {
         <div className="col-6 border-solid border-300 border-round">
           <BeerInfo beer={currentBeer} />
         </div>
-        <div className="col-6 flex justify-content-between">
+        <div className="col-4 flex justify-content-center h-1rem">
           <ToggleFavorite id={Number(id)} size="50px" />
+        </div>
+        <div className="col-2 flex justify-content-end">
           <img
             src={currentBeer.image_url}
             alt="beer"
