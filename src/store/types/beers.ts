@@ -26,12 +26,12 @@ interface getBeersPen {
 }
 
 interface addFavorite {
-  type: "beers/favorite/fulfilled";
+  type: "beers/addFavoriteBeer";
   payload: string;
 }
 
 interface deleteFavorite {
-  type: "beers/deleteFavorite/fulfilled";
+  type: "beers/deleteFavoriteBeer";
   payload: string;
 }
 

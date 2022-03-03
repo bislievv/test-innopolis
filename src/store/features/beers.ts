@@ -2,13 +2,13 @@ import axios from "axios";
 import { Dispatch } from "react";
 import { beerAction, beersState } from "../types/beers";
 
+const favoriteBeersLS = localStorage.getItem("favoriteBeers");
+
 const initialState: beersState = {
   beers: [],
   loading: false,
   error: null,
-  favorites: localStorage.getItem("favoriteBeers")
-    ? JSON.parse(localStorage.getItem("favoriteBeers") || "")
-    : [],
+  favorites: favoriteBeersLS ? JSON.parse(favoriteBeersLS) : [],
 };
 
 export default function beers(
@@ -33,16 +33,16 @@ export default function beers(
         loading: false,
         error: action.error,
       };
-    case "beers/favorite/fulfilled": {
+    case "beers/addFavoriteBeer": {
       return {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
     }
-    case "beers/deleteFavorite/fulfilled":
+    case "beers/deleteFavoriteBeer":
       return {
         ...state,
-        favorites: state.favorites.filter(item => action.payload !== item),
+        favorites: state.favorites.filter(favoriteId => action.payload !== favoriteId),
       };
     default:
       return state;
@@ -53,9 +53,9 @@ export const getBeers = () => {
   return async (dispatch: Dispatch<beerAction>) => {
     try {
       dispatch({ type: "beers/fetch/pending" });
-      const data = await axios.get("https://api.punkapi.com/v2/beers");
+      const { data } = await axios.get("https://api.punkapi.com/v2/beers");
 
-      await dispatch({ type: "beers/fetch/fulfilled", payload: data.data });
+      dispatch({ type: "beers/fetch/fulfilled", payload: data });
     } catch (e: any) {
       dispatch({ type: "beers/fetch/rejected", error: e.toString() });
     }

@@ -1,14 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import SingleBeerPage from './pages/SingleBeerPage';
+import Router from "./pages/router";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/beers/:id" element={<SingleBeerPage />} />
-      </Routes>
+      <Router />
     </div>
   );
 }
