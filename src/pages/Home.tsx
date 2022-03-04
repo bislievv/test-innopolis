@@ -20,20 +20,20 @@ function Home() {
 
   const imageBodyTemplate = (rowData: Beer) => {
     return (
-        <img
-          src={rowData.image_url}
-          alt={rowData.image_url}
-          className="product-image"
-          width={25}
-        />
+      <img
+        src={rowData.image_url}
+        alt={rowData.image_url}
+        className="product-image"
+        width={25}
+      />
     );
   }
 
   const singleBeerLink = (rowData: Beer) => {
     return (
-        <Link to={"/beers/" + rowData.id}>
-          {rowData.name}
-        </Link>
+      <Link to={"/beers/" + rowData.id}>
+        {rowData.name}
+      </Link>
     );
   }
 
@@ -48,13 +48,15 @@ function Home() {
         :
         <div className="card">
           <DataTable
-              value={beers}
-              header="Beers"
-              resizableColumns
-              columnResizeMode="expand"
-              showGridlines
-              dataKey="id"
-              responsiveLayout="scroll"
+            value={beers}
+            header="Beers"
+            resizableColumns
+            columnResizeMode="expand"
+            showGridlines
+            dataKey="id"
+            responsiveLayout="scroll"
+            paginator
+            rows={10}
           >
             <Column body={favorite} header="Favorite" />
             <Column field="name" body={singleBeerLink} header="Name" />

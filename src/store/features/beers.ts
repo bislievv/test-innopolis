@@ -55,7 +55,11 @@ export const getBeers = () => {
   return async (dispatch: Dispatch<beerAction>) => {
     try {
       dispatch({ type: userActionTypes.FETCH_BEERS_PENDING });
-      const { data } = await axios.get("https://api.punkapi.com/v2/beers");
+      const { data } = await axios.get("https://api.punkapi.com/v2/beers", {
+        params: {
+          per_page: 80,
+        },
+      });
 
       dispatch({ type: userActionTypes.FETCH_BEERS_FULFILLED, payload: data });
     } catch (e: any) {
