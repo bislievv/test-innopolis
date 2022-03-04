@@ -1,4 +1,4 @@
-# Installation:  [Demo]("https://beer-shop-psi.vercel.app/beers")
+# Installation:  [Demo](https://beer-shop-psi.vercel.app/beers)
 
 - ``git clone``
 - ``npm install``
